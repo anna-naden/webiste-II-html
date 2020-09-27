@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<style>
+    /* set the CSS */
+  
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 2px;
+    }
+  </style>
+<html>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166186377-1">
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166186377-1');
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <h2>Phoenix Technical Services: Anna Naden</h2>
+  <div>
+    <img class="logo" src="phoenix-logo.jpg">
+  </div>
+</head>
+<body id="body">
+
+
+<link rel="stylesheet" type="text/css" href="./inspector.css">
+<script type="module">
+  import define from "./index.js";
+  import {Runtime, Library, Inspector} from "./runtime.js";
+  const runtime = new Runtime();
+  const main = runtime.module(define, Inspector.into(document.body));
+  </script>
+<h6>The data for Cook County, for the state of Illinois and for Ottawa has been validated. However, this website is still being tested. To report issues, send email to <a href =mailto:anna@phoenix-computer.com>anna@phoenix-computer.com</a> </h6>
+
+
+</body>
+<form action="index.html">
+  <br>
+      <button type="submit">Home</button>
+    </form>
+</form>
+<form action="us-hot2.html">
+  <br>
+      <button type="submit">COVID-19 Maps</button>
+    </form>
+</form>
+<form action="barchart.html">
+  <br>
+      <button type="submit">COVID-19 Barchart</button>
+    </form>
+</form>
+  <html>
