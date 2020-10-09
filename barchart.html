@@ -31,8 +31,8 @@
   </div>
 </head>
 <body id="body">
-
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    
+<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 <style>
     body {
         font-family: "Arial", sans-serif;
@@ -55,112 +55,125 @@
     .label {
         font-size: 13px;
     }
+    .label2 {
+        font-size: 10px;
+    }
 </style>
 
-</head>
-
 <body>
-
-<div id="graphic"></div>
-
-<script src="../js/barchart.js"></script>
-<script>
-
-//sort bars based on value
-    data = data.sort(function (a, b) {
-        return d3.ascending(a.value, b.value);
-    })
-
+  <svg width="960" height="500"></svg>
+  <script src='../js/barchart.js'></script>
+  <script>
+    //------------------------SVG PREPARATION------------------------//
     //set up svg using margin conventions - we'll need plenty of room on the left for labels
     var margin = {
-        top: 15,
-        right: 25,
-        bottom: 15,
-        left: 120
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 100
     };
 
-    var width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var adj = 20;
 
-    var svg = d3.select("#graphic").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg = d3.select('svg');
 
-    var x = d3.scale.linear()
-        .range([0, width])
-        .domain([0, d3.max(data, function (d) {
-            return d.value;
-        })]);
+    var width = +svg.attr('width');
+    var height = +svg.attr('height');
+    const iw = width - margin.left - margin.right;
+    const ih = height - margin.top - margin.bottom;
 
-    var y = d3.scale.ordinal()
-        .rangeRoundBands([height, 0], .1)
-        .domain(data.map(function (d) {
-            return d.name;
-        }));
+    //-----------------------DATA PREPARATION------------------------//
+    var dataset = data;
+    //sort bars based on value
+    var data = data.sort(function (a, b) {
+        return d3.descending(a.value, b.value);
+    })
 
-    //make y axis to show bar names
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        //no tick marks
-        .tickSize(10)
-        .orient("left");
 
-    var gy = svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-
-    var bars = svg.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("g")
-
-    //append rects
-    bars.append("rect")
-        .attr("class", "bar")
-        .attr("y", function (d) {
-            return y(d.name);
-        })
-        .attr("height", y.rangeBand())
-        .attr("x", 0)
-        .attr("width", function (d) {
-            return x(d.value);
-        });
-
-    //add a value label to the right of each bar
-    bars.append("text")
-        .attr("class", "label")
-        //y position of the label is halfway down the bar
-        .attr("y", function (d) {
-            return y(d.name) + y.rangeBand() / 2 + 4;
-        })
-        //x position is 3 pixels to the right of the bar
-        .attr("x", function (d) {
-            return x(d.value) + 3;
-        })
-        .text(function (d) {
-            return d3.round(d.value,2);
-        });
+    //---------------------------BAR CHART---------------------------//
     
-</script>
-<h6>The data for Cook County, for the state of Illinois and for Ottawa has been validated. However, this website is still being tested. To report issues, send email to <a href =mailto:anna@phoenix-computer.com>anna@phoenix-computer.com</a> </h6>
+    const xValue = d => d.value;
+    const yValue = d => d.name;
+
+    var xScale=d3.scaleLinear()
+      .domain([0, d3.max(data, xValue)])
+      .range([0,iw]);
+    var yScale=d3.scaleBand()
+      .domain(data.map(yValue))
+      .range([30,ih])
+      .padding(0.1);
+
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale).tickSize(0);
+
+    //Shift y axis to the right
+    const g = svg.append('g').attr('transform', `translate(${margin.left}, 0)`);
+
+    // Decorate the y axis with values
+    yAxis(g.append('g'));
+
+    //Decorate the x axis with tick marks
+    xAxis(g.append('g'))
+
+    // svg.selectAll("div")
+    // .data(data)
+    // .enter()
+    // .append("rect")
+    // .attr("class", "bar")
+    // .attr("y", d => yScale(yValue(d)))
+    // .attr("x", 100)
+    // .attr("width", d => xScale(xValue(d)))
+    // .attr("height", yScale.bandwidth());
+
+    var bars = svg.selectAll("div")
+      .data(data)
+      .enter()
+      .append("g")
+ 
+    bars
+      .append("text")
+      .attr("class", "label2")
+      .attr("y", function(d) {
+        return yScale(d.name)+yScale.bandwidth()/2+4;
+      })
+      .attr("x", function (d) {
+        return xScale(d.value)+160;
+      })
+      .text(function(d) {
+        var f = d3.format(".2f");
+        return f(d.value);
+      });
+
+    bars.append("rect")
+      .attr("class", "bar")
+      .attr("y", d => yScale(yValue(d)))
+      .attr("x", 100)
+      .attr("width", d => xScale(xValue(d)))
+      .attr("height", yScale.bandwidth());
+
+    </script>
+    <h6>The chart shows COVID-19 fatalities in the past 30 days per 100,000 population. The results for the state of Illinois have been checked against the Johns Hopkins University dataset. However, this website is still being tested. To report issues, send email to <a href =mailto:anna@phoenix-computer.com>anna@phoenix-computer.com</a> </h6>
+  </body>
 
 
-</body>
-<form action="index.html">
-  <br>
-      <button type="submit">Home</button>
+    <form action="index.html">
+      <br>
+          <button type="submit">Home</button>
+        </form>
     </form>
-</form>
-<form action="us-hot2.html">
-  <br>
-      <button type="submit">COVID-19 Maps</button>
+    <form action="us-hot2.html">
+      <br>
+          <button type="submit">North America COVID-19 Maps</button>
+        </form>
     </form>
-</form>
-<form action="barchart.html">
-  <br>
-      <button type="submit">COVID-19 Barchart</button>
+    <form action="barchart.html">
+      <br>
+          <button type="submit">US COVID-19 Barchart</button>
+        </form>
     </form>
-</form>
-  <html>
+    <form action="world-hot.html">
+      <br>
+          <button type="submit">World COVID-19 Map</button>
+        </form>
+    </form>
+  </body>
