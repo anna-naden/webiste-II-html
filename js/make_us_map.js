@@ -28,7 +28,7 @@ function make_us_map(statesData) {
     info.update = function (props) {
         this._div.innerHTML = '<h3>COVID-19 by State</h3>' + (props ?
             '<b>' + props.name + '</b><br />' + formatter.format(props.density)  + ' fatalities per 100,000 people in past 30 days</sup>'
-            : 'Mouse over a state or province to fatalities per capita.<br/>Click to see graph.');
+            : 'Mouse over a state or province to fatalities per capita.<br/>Click to see state detail map.');
     };
 
     info.addTo(map);
@@ -81,17 +81,18 @@ function make_us_map(statesData) {
         info.update();
     }
 
-    function zoomToFeature(e) {
-      fips = e.target.feature.id.substring(3,5);
-      get_state_features(fips);
-      map.fitBounds(e.target.getBounds());
+    function state_hot(e) {
+        fips = e.target.feature.id.substring(3,5);
+        window.location.href = "state-hot.html?fips=17";
+    //   get_state_features(fips);
+        // map.fitBounds(e.target.getBounds());
     }
 
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
-            click: zoomToFeature
+            click: state_hot
         });
     }
     geojson = L.geoJson(statesData, {
