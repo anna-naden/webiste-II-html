@@ -67,21 +67,20 @@ function make_state_map(fips,state_features) {
       zoom_level = 4;
     };
     if (fips == texas) {
-      zoom_level = 7;
+      zoom_level = 5;
     }
-    var map = L.map('map', {zoomControl: false}).setView(lat_lon, zoom_level);
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    var map = L.map('map').setView(lat_lon, zoom_level);
+     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: "Data from Johns Hopkins University",
         id: 'mapbox/light-v9',
         tileSize: 512,
         zoomOffset: -1
     }).addTo(map);
 
 
+  
+    
     // control that shows state info on hover
     var info = L.control();
 
@@ -113,12 +112,13 @@ function make_state_map(fips,state_features) {
     }
 
     function style(feature) {
+
         return {
             weight: 2,
-            opacity: 1.0,
+            opacity: 1,
             color: 'white',
             dashArray: '3',
-            fillOpacity: 0.5,
+            fillOpacity: 0.4,
             fillColor: getColor(feature.properties.density)
         };
     }
@@ -146,39 +146,30 @@ function make_state_map(fips,state_features) {
         geojson.resetStyle(e.target);
         info.update();
     }
-    function average_lat(coords) {
-        if (coords.length == 1) {
-            coords = coords[0];
-        }
-        l = coords.length;
-        lat = 0;
-        lon = 0;
-        var i;
-        var n=0;
-        for (i=0;i<l;i++) {
-            lat += coords[i][0];
-            lon += coords[i][1];
-        }
-        return [lat/l,lon/l]
-    }
+
     function onEachFeature(feature, layer) {
-        container = L.DomUtil.get('map')
-        label = L.DomUtil.create('label', 'leaflet-label-overlay', container);
-        // coords = feature.geometry.coordinates[0][0];
-        coords = average_lat(feature.geometry.coordinates[0]);
+        coords = feature.geometry.coordinates[0][0];
         coords2 = [coords[1],coords[0]];
-        name = feature.properties.name;
-        name = name.replace("County","")
-        label.innerHTML = name;
-        var pos = map.latLngToLayerPoint(new L.latLng(coords2));
-        pos.x -= 12;
-        label.style = "position:absolute; left: " + pos.x + 
-        "px;" + "top: " + pos.y + "px; font: 8px Courier; text-align:left;";
-        map.getPanes().popupPane.appendChild(label);
-        
+        layer._latlng = new L.latLng(coords2);
+        layer._label = feature.properties.name;
+        layer.onAdd = function(map) {
+            layer._map = map;
+            if (!layer._container) {
+                layer._container = L.DomUtil.create('div', 'leaflet-label-overlay');
+            }
+            map.getPanes().popupPane.appendChild(layer._container);
+            layer._container.innerHTML = layer._label;
+            layer._update_end();
+        }
+        layer._update_end = function() {
+            var pos = layer._map.latLngToLayerPoint(layer._latlng);
+            var op = new L.Point(pos.x, pos.y);
+            L.DomUtil.setPosition(layer._container, op);
+        }
+
         layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
         });
     }
     geojson = L.geoJson(state_features, {

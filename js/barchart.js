@@ -1,35 +1,35 @@
 var data = [
 {
 "name": "Alabama",
-"value": 6.750714076666493,
+"value": 6.404000664873954,
 },
 {
 "name": "Alaska",
-"value": 2.323848840467777,
+"value": 2.1871518498520257,
 },
 {
 "name": "Arizona",
-"value": 6.4709206306551,
+"value": 6.1137148208949466,
 },
 {
 "name": "Arkansas",
-"value": 20.412193767388473,
+"value": 20.876107262101847,
 },
 {
 "name": "California",
-"value": 5.944995805475181,
+"value": 5.7349342252902344,
 },
 {
 "name": "Colorado",
-"value": 2.22270998357973,
+"value": 2.8652120882082457,
 },
 {
 "name": "Connecticut",
-"value": 1.4024116431580402,
+"value": 1.4865563417475227,
 },
 {
 "name": "Delaware",
-"value": 4.210465780209579,
+"value": 4.518548642176133,
 },
 {
 "name": "District of Columbia",
@@ -37,79 +37,79 @@ var data = [
 },
 {
 "name": "Florida",
-"value": 13.325426230892017,
+"value": 13.60944125537993,
 },
 {
 "name": "Georgia",
-"value": 11.019623123238096,
+"value": 10.558117539444364,
 },
 {
 "name": "Hawaii",
-"value": 5.155833295665145,
+"value": 5.2264611490304205,
 },
 {
 "name": "Idaho",
-"value": 5.315978993489325,
+"value": 5.427894340720679,
 },
 {
 "name": "Illinois",
-"value": 5.721356070291713,
+"value": 5.776596749591081,
 },
 {
 "name": "Indiana",
-"value": 5.481105115564422,
+"value": 5.703914266603626,
 },
 {
 "name": "Iowa",
-"value": 7.796974393595071,
+"value": 8.589349840098635,
 },
 {
 "name": "Kansas",
-"value": 8.85589400936528,
+"value": 9.302121226891437,
 },
 {
 "name": "Kentucky",
-"value": 4.655667502970786,
+"value": 4.6780505198119915,
 },
 {
 "name": "Louisiana",
-"value": 9.744462757437736,
+"value": 9.550864159607846,
 },
 {
 "name": "Maine",
-"value": 0.6695372456130432,
+"value": 0.5207511910323669,
 },
 {
 "name": "Maryland",
-"value": 2.8284659459316406,
+"value": 2.8780881555093885,
 },
 {
 "name": "Massachusetts",
-"value": 6.13710287830125,
+"value": 6.07906880853008,
 },
 {
 "name": "Michigan",
-"value": 3.1441323331254267,
+"value": 3.3944613405398716,
 },
 {
 "name": "Minnesota",
-"value": 4.344255086147465,
+"value": 4.131475245193303,
 },
 {
 "name": "Mississippi",
-"value": 14.48180181839014,
+"value": 14.044995731060508,
 },
 {
 "name": "Missouri",
-"value": 10.297473143473129,
+"value": 10.118244971672173,
 },
 {
 "name": "Montana",
-"value": 7.391619213718846,
+"value": 7.6723136142398145,
 },
 {
 "name": "Nebraska",
-"value": 4.239022998250627,
+"value": 4.807672424845224,
 },
 {
 "name": "Nevada",
@@ -117,7 +117,7 @@ var data = [
 },
 {
 "name": "New Hampshire",
-"value": 1.61799088188593,
+"value": 1.470900801714482,
 },
 {
 "name": "New Jersey",
@@ -125,19 +125,19 @@ var data = [
 },
 {
 "name": "New Mexico",
-"value": 4.435268684284699,
+"value": 4.5306508065273805,
 },
 {
 "name": "New York",
-"value": 1.4136229351531064,
+"value": 1.4547465114484694,
 },
 {
 "name": "North Carolina",
-"value": 7.122368585148632,
+"value": 7.2844572945830715,
 },
 {
 "name": "North Dakota",
-"value": 22.701564964530444,
+"value": 24.801131666452335,
 },
 {
 "name": "Ohio'",
@@ -145,39 +145,39 @@ var data = [
 },
 {
 "name": "Oklahoma",
-"value": 5.307089690573926,
+"value": 5.408177113251525,
 },
 {
 "name": "Oregon",
-"value": 2.370939676893083,
+"value": 2.2761020898173596,
 },
 {
 "name": "Pennsylvania",
-"value": 3.9134543858770696,
+"value": 4.155604258057088,
 },
 {
 "name": "Rhode Island",
-"value": 5.569395135369341,
+"value": 6.41896388483246,
 },
 {
 "name": "South Carolina",
-"value": 10.177298641952145,
+"value": 9.94423073412118,
 },
 {
 "name": "South Dakota",
-"value": 12.321131645074543,
+"value": 11.755942120071124,
 },
 {
 "name": "Tennessee",
-"value": 10.865150016678445,
+"value": 10.528359652280056,
 },
 {
 "name": "Texas",
-"value": 9.463413096501535,
+"value": 9.218550731395263,
 },
 {
 "name": "Utah",
-"value": 2.027475094807855,
+"value": 1.9962831702723491,
 },
 {
 "name": "Vermont",
@@ -185,22 +185,22 @@ var data = [
 },
 {
 "name": "Virginia",
-"value": 7.544942492659205,
+"value": 7.556658241871408,
 },
 {
 "name": "Washington",
-"value": 2.61330001616569,
+"value": 2.8890753947560395,
 },
 {
 "name": "West Virginia",
-"value": 6.751678294247068,
+"value": 6.86327628258173,
 },
 {
 "name": "Wisconsin",
-"value": 4.602886009527974,
+"value": 5.1181344434303595,
 },
 {
 "name": "Wyoming",
-"value": 2.073401882303342,
+"value": 2.5917523528791775,
 },
 ];
