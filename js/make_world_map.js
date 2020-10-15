@@ -2,7 +2,7 @@ function make_world_map(features) {
     const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-    })
+    });
 
     // features = features['features']
 

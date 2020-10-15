@@ -2,7 +2,7 @@ function make_us_map(statesData) {
     const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-    })
+    });
     var map = L.map('map').setView([37.8, -96], 4);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -84,8 +84,6 @@ function make_us_map(statesData) {
     function state_hot(e) {
         fips = e.target.feature.id.substring(3,5);
         window.location.href = "state-hot.html?fips=17";
-    //   get_state_features(fips);
-        // map.fitBounds(e.target.getBounds());
     }
 
     function onEachFeature(feature, layer) {

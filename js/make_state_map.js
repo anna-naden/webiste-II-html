@@ -2,7 +2,7 @@ function make_state_map(fips,state_features) {
     const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-    })
+    });
     const state_lat_long = {
         '01':[32.806671,-86.791130],
         '02':[61.370716,-152.404419],
@@ -63,7 +63,7 @@ function make_state_map(fips,state_features) {
     lat_lon = state_lat_long[fips];
     zoom_level = 7;
     if (fips==alaska) {
-      lat_lon = [64.835365, -147.776749]
+      lat_lon = [64.835365, -147.776749];
       zoom_level = 4;
     };
     if (fips == texas) {
@@ -157,16 +157,19 @@ function make_state_map(fips,state_features) {
             lat += coords[i][0];
             lon += coords[i][1];
         }
-        return [lat/l,lon/l]
+        return [lat/l,lon/l];
+    }
+    function county_time_series(e) {
+        fips = e.target.id;
+        console.log(fips);
     }
     function onEachFeature(feature, layer) {
-        container = L.DomUtil.get('map')
+        container = L.DomUtil.get('map');
         label = L.DomUtil.create('label', 'leaflet-label-overlay', container);
-        // coords = feature.geometry.coordinates[0][0];
         coords = average_lat(feature.geometry.coordinates[0]);
         coords2 = [coords[1],coords[0]];
         name = feature.properties.name;
-        name = name.replace("County","")
+        name = name.replace("County","");
         label.innerHTML = name;
         var pos = map.latLngToLayerPoint(new L.latLng(coords2));
         pos.x -= 12;
@@ -177,6 +180,7 @@ function make_state_map(fips,state_features) {
         layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
+        click: county_time_series
         });
     }
     geojson = L.geoJson(state_features, {
