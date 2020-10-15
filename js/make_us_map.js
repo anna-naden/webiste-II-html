@@ -83,7 +83,7 @@ function make_us_map(statesData) {
 
     function state_hot(e) {
         fips = e.target.feature.id.substring(3,5);
-        window.location.href = "state-hot.html?fips=17";
+        window.location.href = "state-hot.html?fips=" + fips;
     }
 
     function onEachFeature(feature, layer) {

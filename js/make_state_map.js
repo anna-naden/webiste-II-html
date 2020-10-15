@@ -160,8 +160,8 @@ function make_state_map(fips,state_features) {
         return [lat/l,lon/l];
     }
     function county_time_series(e) {
-        fips = e.target.id;
-        console.log(fips);
+        fips = e.target.feature.id.replace("?fips=", "");
+        window.location.href = "county-time-series.html?fips=" +  fips
     }
     function onEachFeature(feature, layer) {
         container = L.DomUtil.get('map');

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<style>
+    /* set the CSS */
+  
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 2px;
+    }
+  </style>
+<html>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166186377-1">
+  </script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166186377-1');
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylesheets/style.css" />
+  <h2>Phoenix Technical Services: Anna Naden</h2>
+  <div>
+    <img class="logo" src="phoenix-logo.jpg">
+  </div>
+</head>
+<body id="body">
+    
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="../js/make_county_time_series.js"></script>
+<style>
+    html, body {
+        height: 100vh;
+        height: 100vw;
+    }
+    #map {
+        height: 40vh;
+        height: 40vw;
+    }
+</style>
+<script>
+    function get_county_time_series(fips) {
+        console.log(fips)
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var county_features = JSON.parse(this.responseText);
+            make_county_time_series("fips",county_features);
+        };
+        };
+        xhttp.open("GET", "https://qwwj8ox9l9.execute-api.us-east-1.amazonaws.com/stage/fips?fips="+fips, true);
+        xhttp.send();
+    }
+</script>
+<div id="county-time-series"></div>
+<h6>The data for Cook County, for the state of Illinois and for Ottawa has been validated. However, this website is still being tested. To report issues, send email to <a href =mailto:anna@phoenix-computer.com>anna@phoenix-computer.com</a> </h6>
+<script>
+    var fips = window.location.search.replace("?fips=", "")
+    console.log('county-ts.html: ' + fips)
+    document.getElementById("body").onload = function() {get_county_time_series(fips)};
+</script>
+<div id="map"></div>
+
+    <form action="index.html">
+      <br>
+          <button type="submit">Home</button>
+        </form>
+    </form>
+    <form action="us-hot2.html">
+      <br>
+          <button type="submit">North America COVID-19 Maps</button>
+        </form>
+    </form>
+    <form action="barchart.html">
+      <br>
+          <button type="submit">US COVID-19 Barchart</button>
+        </form>
+    </form>
+    <form action="world-hot.html">
+      <br>
+          <button type="submit">World COVID-19 Map</button>
+        </form>
+    </form>
+  </body>
