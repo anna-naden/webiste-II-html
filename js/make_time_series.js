@@ -1,10 +1,10 @@
-function make_county_time_series(fips, features) {
+function make_time_series(us_data, region_data, title) {
     
-    var data = features.county;
-    var us_data = features.us;
-     title = "US and " + data.county + '\n fatalities per 100,000 persons in past six months:\n' +
-        data.start_date + ' - ' + data.end_date;
-    data = data.stats;
+    // var data = features.county;
+    // var us_data = features.us;
+    //  title = "US and " + data.county + '\n Total fatalities to date per 100,000 persons:\n' +
+    //     data.start_date + ' - ' + data.end_date;
+    data = region_data.stats;
     us_data = us_data.stats;
 
     var barchart_width  = 800;
