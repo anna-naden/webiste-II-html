@@ -85,11 +85,16 @@ function make_world_map(features) {
         geojson.resetStyle(e.target);
         info.update();
     }
+    function nation_time_series(e) {
+        ISO_A3 = e.target.feature.id.replace("?ISO_A3=", "");
+        window.location.href = "ISO-A3-time-series.html?ISO_A3=" +  ISO_A3
+    }
 
     function onEachFeature(feature, layer) {
         layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
+            click: nation_time_series
         });
     }
     geojson = L.geoJson(features, {
